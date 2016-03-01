@@ -48,7 +48,7 @@ class Splash extends State
 	// Switch to the designated state, set above
 	function switchState ()
 	{
-		Main.state.set(destinationState);
+		Main.changeState(destinationState);
 	}
 
 	// Optionally skip splash screen by pressing keyboard or mouse or touch

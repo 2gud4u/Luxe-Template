@@ -13,20 +13,21 @@ class Main extends luxe.Game
 	var initialState: String = 'Splash';
 	var showCursor: Bool = true;
 
-	// Optional values,
-	// useful when game does not fully cover the
-	// entire screen, great to use when
-	// Luxe.camera.size_mode == SizeMode.fit
-	// public static var w: Int = 1280;
-	// public static var h: Int = 720;
+	//
+	// Window size variables for when you use
+	// SizeMode.fit on your Luxe.camera
+	//
+	public static var w: Int = 1280;
+	public static var h: Int = 720;
 
-	public static var state: States;
+	static var state: States;
+
 
 	override function config (config:luxe.AppConfig) : luxe.AppConfig
 	{
-		// Preloading resources
-		// Resources in Luxe are generally required
-		// to be pre-loaded before used
+		//
+		// Define resources to preload
+		//
 		config.preload.textures = [
 			{id: 'assets/logo_box.png'}
 		];
@@ -34,17 +35,21 @@ class Main extends luxe.Game
 		return config;
 	}
 
+	//
 	// Scale camera's viewport accordingly when game is scaled, common and suitable for most games
+	//
+	/*
 	override function onwindowsized ( e : WindowEvent )
 	{
         Luxe.camera.viewport = new luxe.Rectangle( 0, 0, e.x, e.y);
 	}
+	*/
 
 	override function ready ()
 	{
 		// Optional, set a consistent scale camera mode for the entire game
 		// this is a luxe's wip feature
-		// Luxe.camera.size = new Vector(Main.w, Main.h);
+		Luxe.camera.size = new Vector(Main.w, Main.h);
 		// Luxe.camera.size_mode = SizeMode.fit;
 
 		// Set background color
@@ -61,6 +66,12 @@ class Main extends luxe.Game
 		state.add (new Splash({name: 'Splash'}));
 
 		// Run the inital state upon running the game
-		state.set(initialState);
+		changeState( initialState );
+	}
+
+
+	public static function changeState ( stateName : String )
+	{
+		state.set( stateName );
 	}
 }
