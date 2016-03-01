@@ -1,13 +1,14 @@
 package states;
+
 import luxe.Color;
-import luxe.Vector;
-import luxe.Sprite;
 import luxe.Input;
+import luxe.Sprite;
 import luxe.States;
+import luxe.Vector;
 import phoenix.Texture;
 
-class Splash extends State {
-
+class Splash extends State
+{
 	var logo: Sprite;
 
 	var delayStartTime: Float = 1;
@@ -16,9 +17,10 @@ class Splash extends State {
 	var delaySwitchTime: Float = 1;
 
 	// Optionally and quickly set the next state (with name:String) here
-	var destinationState: String = 'play';
+	var destinationState: String = 'Play';
 
-	override function onenter<T> (_:T) {
+	override function onenter<T> ( _ : T )
+	{
 		// Create the logo sprite
 		logo = new Sprite ({
 			// Change path to the texture of your logo/splash screen here
@@ -31,38 +33,44 @@ class Splash extends State {
 		Luxe.timer.schedule(delayStartTime, fadeIn);
 	}
 
-	function fadeIn() {
+	function fadeIn ()
+	{
 		logo.color.tween(fadeTime, { a: 1 } );
 		Luxe.timer.schedule(fadeTime + stayTime, fadeOut);
 	}
 
-	function fadeOut() {
+	function fadeOut ()
+	{
 		logo.color.tween(fadeTime, { a: 0 } );
 		Luxe.timer.schedule(fadeTime + delaySwitchTime, switchState);
 	}
 
 	// Switch to the designated state, set above
-	function switchState() {
+	function switchState ()
+	{
 		Main.state.set(destinationState);
 	}
 
 	// Optionally skip splash screen by pressing keyboard or mouse or touch
-	override function onmouseup(e: MouseEvent) {
+	override function onmouseup ( e : MouseEvent )
+	{
 		switchState();
 	}
 
-	override function onkeyup(e: KeyEvent) {
+	override function onkeyup ( e : KeyEvent )
+	{
 		switchState();
 	}
 
-	//override function update(dt: Float) {
-		//
-	//}
-	//
-	override function onleave<T> (_:T) {
+	/*
+	override function update(dt: Float) {
+		
+	}
+	*/
+	
+	override function onleave<T> ( _ : T )
+	{
 		Luxe.timer.reset();
 		logo.destroy();
 	}
-
-
 }
