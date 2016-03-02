@@ -1,6 +1,7 @@
 package;
 
 import luxe.Color;
+import luxe.Input;
 import luxe.Screen.WindowEvent;
 import luxe.States;
 import luxe.Vector;
@@ -8,19 +9,28 @@ import luxe.Vector;
 import states.Play;
 import states.Splash;
 
+#if debug
+import DebugMenu;
+#end
+
 class Main extends luxe.Game
 {
-	var initialState: String = 'Splash';
-	var showCursor: Bool = true;
+	var initialState : String = 'Splash';
+	var showCursor : Bool = true;
+
+	#if debug
+	var debugMenuKey : Int = Key.f1;
+	var debugMenu : DebugMenu;
+	#end
 
 	//
 	// Window size variables for when you use
 	// SizeMode.fit on your Luxe.camera
 	//
-	public static var w: Int = 1280;
-	public static var h: Int = 720;
+	public static var w : Int = 1280;
+	public static var h : Int = 720;
 
-	static var state: States;
+	static var state : States;
 
 
 	override function config (config:luxe.AppConfig) : luxe.AppConfig
@@ -35,15 +45,6 @@ class Main extends luxe.Game
 		return config;
 	}
 
-	//
-	// Scale camera's viewport accordingly when game is scaled, common and suitable for most games
-	//
-	/*
-	override function onwindowsized ( e : WindowEvent )
-	{
-        Luxe.camera.viewport = new luxe.Rectangle( 0, 0, e.x, e.y);
-	}
-	*/
 
 	override function ready ()
 	{
@@ -53,10 +54,17 @@ class Main extends luxe.Game
 		// Luxe.camera.size_mode = SizeMode.fit;
 
 		// Set background color
-		Luxe.renderer.clear_color = new Color().rgb(0x4D4D4D);
+		Luxe.renderer.clear_color = new Color().rgb(0x333333);
 
 		// Actual codes that hide/show the cursor
 		Luxe.screen.cursor.grab = !showCursor;
+
+		//
+		// Create debug menu canvas
+		//
+		#if debug
+			debugMenu = new DebugMenu();
+		#end
 
 		// Create a state machine
 		state = new States( { name: "StateMachine" } );
@@ -68,6 +76,17 @@ class Main extends luxe.Game
 		// Run the inital state upon running the game
 		changeState( initialState );
 	}
+
+
+	#if debug
+	override function onkeydown ( e : KeyEvent )
+	{
+		if ( e.keycode == debugMenuKey )
+		{
+			debugMenu.toggleVisible();
+		}
+	}
+	#end
 
 
 	public static function changeState ( stateName : String )

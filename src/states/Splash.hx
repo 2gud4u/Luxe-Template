@@ -59,7 +59,8 @@ class Splash extends State
 
 	override function onkeyup ( e : KeyEvent )
 	{
-		switchState();
+		if ( e.keycode == Key.escape )
+			switchState();
 	}
 
 	/*
