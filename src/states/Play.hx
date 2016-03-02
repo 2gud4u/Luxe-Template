@@ -1,6 +1,5 @@
 package states;
 
-import luxe.Camera;
 import luxe.Color;
 import luxe.Input;
 import luxe.Sprite;
@@ -20,7 +19,7 @@ class Play extends State
 	{
 		block = new Sprite({
 			name: 'default testing sprite',
-			pos: Luxe.screen.mid,
+			pos: new Vector(Luxe.camera.size.x/2,Luxe.camera.size.y/2),
 			color: new Color().rgb(0xf94b04),
 			size: new Vector(128, 128)
 		});
