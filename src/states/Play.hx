@@ -19,7 +19,7 @@ class Play extends State
 	{
 		block = new Sprite({
 			name: 'default testing sprite',
-			pos: new Vector(Luxe.camera.size.x/2,Luxe.camera.size.y/2),
+			pos: new Vector(Luxe.camera.viewport.w/2,Luxe.camera.viewport.h/2),
 			color: new Color().rgb(0xf94b04),
 			size: new Vector(128, 128)
 		});

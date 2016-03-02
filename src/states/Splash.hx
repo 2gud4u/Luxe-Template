@@ -25,7 +25,7 @@ class Splash extends State
 		logo = new Sprite ({
 			// Change path to the texture of your logo/splash screen here
 			texture: Luxe.resources.texture('assets/logo_box.png'),
-			pos: new Vector(Luxe.camera.size.x/2, Luxe.camera.size.y/2),
+			pos: new Vector( Luxe.camera.viewport.w/2, Luxe.camera.viewport.h/2 ),
 			color: new Color(1, 1, 1, 0)
 		});
 

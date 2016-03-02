@@ -48,8 +48,10 @@ class Main extends luxe.Game
 
 	override function ready ()
 	{
+		//
 		// Optional, set a consistent scale camera mode for the entire game
 		// this is a luxe's wip feature
+		//
 		Luxe.camera.size = new Vector(Main.w, Main.h);
 		// Luxe.camera.size_mode = SizeMode.fit;
 
@@ -64,18 +66,31 @@ class Main extends luxe.Game
 		//
 		#if debug
 			debugMenu = new DebugMenu();
+			debugMenu.setVisible( false );
 		#end
 
 		// Create a state machine
 		state = new States( { name: "StateMachine" } );
 
 		// Add states to the state machine
-		state.add (new Play({name: 'Play'}));
 		state.add (new Splash({name: 'Splash'}));
+		state.add (new Play({name: 'Play'}));
 
 		// Run the inital state upon running the game
 		changeState( initialState );
 	}
+
+
+	//
+	// If not setting the camera size above and you
+	// want in-game resolution to match the window size
+	//
+	/*
+	override function onwindowsized( e : WindowEvent )
+	{
+        Luxe.camera.viewport = new luxe.Rectangle( 0, 0, e.x, e.y );
+    }
+    */
 
 
 	#if debug

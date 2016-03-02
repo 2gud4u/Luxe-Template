@@ -23,10 +23,6 @@
     		main : 'Main',
             mobile: {
                 orientation: 'landscape',
-                android: {
-                    sdk_min: '12',
-                    sdk_target: '19'
-                },
                 ios: {
                     devices: 'iPhone',
                     deployment_target: '8.0',
@@ -37,41 +33,19 @@
 
         build : {
             number: 1,
-
-            "comment" : "flow build android --d android_release",
             dependencies : {
                 luxe : '*',
-            },
-            files: {
-                keystore: 'indiedev.keystore => project/indiedev.keystore',
-                passwords : 'passwords.sensitive.properties => project/passwords.sensitive.properties'
-            },
+                mint : '*'
+            }
         },
 
         files : {
             config : 'config.json',
             assets : 'assets/',
-            comments: "index : { path:'custom_index.html => index.html', template:'project', not_listed: true }",
         }
     },
 
     if: {
-        android_release: {
-            app: {
-                mobile: {
-                    android: {
-                        build_type: "release",
-                        keystore_path: "indiedev.keystore",
-                        keystore_alias: "indiedev"
-                    }
-                }
-            },
-
-            build: {
-                defines: ['no_debug_console']
-            }
-        },
-
         ios: {
             build: {
                 defines: ['no_debug_console']

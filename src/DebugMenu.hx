@@ -32,7 +32,7 @@ class DebugMenu extends luxe.Entity
             name:'canvas',
             rendering: rendering,
             options: { color:new Color(1,1,1,0) },
-            x: 0, y:0, w: Luxe.camera.size.x, h: Luxe.camera.size.y
+            x: 0, y:0, w: Luxe.camera.viewport.w, h: Luxe.camera.viewport.h,
         });
 
         focus = new Focus( canvas );
@@ -42,7 +42,7 @@ class DebugMenu extends luxe.Entity
             parent: canvas,
             name: 'debugMain',
             title: "Debug Options",
-            x:Luxe.camera.size.x - 256, y:96,
+            x:Luxe.camera.viewport.w - 256, y:96,
             w:176, h: 256,
             resizable: false,
             visible: true,
@@ -53,5 +53,10 @@ class DebugMenu extends luxe.Entity
 	{
 		canvas.visible = !canvas.visible;
 		mainWindow.visible = canvas.visible;
+	}
+
+	public function setVisible ( vis : Bool )
+	{
+		canvas.visible = mainWindow.visible = vis;
 	}
 }
