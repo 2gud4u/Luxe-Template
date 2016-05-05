@@ -33,7 +33,7 @@ class Main extends luxe.Game
 	static var state : States;
 
 
-	override function config (config:luxe.AppConfig) : luxe.AppConfig
+	override function config (config:luxe.GameConfig) : luxe.GameConfig
 	{
 		//
 		// Define resources to preload
